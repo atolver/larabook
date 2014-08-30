@@ -4,7 +4,7 @@
 use Laracasts\Validation\FormValidator;
 /**
  * Class RegistrationForm
- * @author John Doe
+ * @author Alonzo Tolver
  */
 class RegistrationForm extends FormValidator
 {
