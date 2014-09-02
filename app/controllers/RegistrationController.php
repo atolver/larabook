@@ -17,23 +17,23 @@ class RegistrationController extends \BaseController {
         $this->registrationForm = $registrationForm;
     }
 
-	/**
-	 * Show the form to register the user.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		return View::make('registration.create');
-	}
+    /**
+     * Show the form to register the user.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        return View::make('registration.create');
+    }
 
-	/**
-	 * Create a new Larabook user.
-	 *
-	 * @return string
-	 */
-	public function store()
-	{
+    /**
+     * Create a new Larabook user.
+     *
+     * @return string
+     */
+    public function store()
+    {
         $this->registrationForm->validate(Input::all());
 
         $user = User::create(
@@ -42,7 +42,7 @@ class RegistrationController extends \BaseController {
 
         Auth::login($user);
 
-		return Redirect::home();
-	}
+        return Redirect::home();
+    }
 
 }
