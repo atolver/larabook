@@ -1,20 +1,52 @@
 <?php
+/**
+ * RegistrationController File Doc Comment
+ *
+ * PHP version 5
+ *
+ * @category RegistrationController
+ * @package  MyPackage
+ * @author   Alonzo Tolver <alonzotolver@gmail.com>
+ * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @link     www.laracbook.app
+ *
+ */
 
 use Larabook\Forms\RegistrationForm;
+use Larabook\Registration\RegisterUserCommand;
+use Larabook\Core\CommandBus;
 
-class RegistrationController extends \BaseController {
+/**
+ * RegistrationController Class Doc Comment
+ *
+ * @category RegistrationController
+ * @package  MyPackage
+ * @author   Alonzo Tolver <alonzotolver@gmail.com>
+ * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @link     www.laracbook.app
+ *
+ */
+class RegistrationController extends \BaseController
+{
+
+    use CommandBus;
 
     /**
+     * _registrationForm
+     *
      * @var RegistrationForm
+     * @access private
      */
-    private $registrationForm;
+    private $_registrationForm;
 
     /**
-     * @param mixed RegistrationForm $registrationForm
+     * Constructor
+     *
+     * @param RegistrationForm $registrationForm Registration form
      */
     public function __construct(RegistrationForm $registrationForm)
     {
-        $this->registrationForm = $registrationForm;
+        $this->_registrationForm = $registrationForm;
     }
 
     /**
@@ -34,11 +66,15 @@ class RegistrationController extends \BaseController {
      */
     public function store()
     {
-        $this->registrationForm->validate(Input::all());
+        $this->_registrationForm->validate(Input::all());
 
-        $user = User::create(
-            Input::only('username', 'email', 'password')
+        extract(Input::only('email', 'username', 'password'));
+
+        $user = $this->execute(
+            new RegisterUserCommand($email, $username, $password)
         );
+
+
 
         Auth::login($user);
 

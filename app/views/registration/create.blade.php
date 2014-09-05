@@ -24,8 +24,8 @@
             </div>
 
             <div class="form-group">
-                {{ Form::label('password_confirm', 'Password Confirm:') }}
-                {{ Form::password('password_confirm', ['class' => 'form-control']) }}
+                {{ Form::label('password_confirmation', 'Password Confirmation:') }}
+                {{ Form::password('password_confirmation', [ 'class' => 'form-control']) }}
             </div>
 
             <div class="form-group">

@@ -1,7 +1,7 @@
 <?php namespace Larabook\Forms;
 
 
-use Laracasts\Validation\FormValidator;
+ use Laracasts\Validation\FormValidator;
 /**
  * Class RegistrationForm
  * @author Alonzo Tolver
@@ -19,6 +19,12 @@ class RegistrationForm extends FormValidator
         'email' => 'required|email|unique:users',
         'password' => 'required|confirmed'
     ];
+
+    public function tester2($param)
+    {
+        return null;
+    }
+
 
 }
 
