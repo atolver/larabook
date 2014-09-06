@@ -14,6 +14,7 @@
 
 namespace Larabook\Users;
 
+use Laracasts\
 /**
  * Class UserRepository
  *

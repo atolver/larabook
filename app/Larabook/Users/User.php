@@ -1,5 +1,16 @@
 <?php
-
+/**
+ * User File Doc Comment
+ *
+ * PHP version 5
+ *
+ * @category User
+ * @package  MyPackage
+ * @author   Alonzo Tolver <alonzotolver@gmail.com>
+ * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @link     www.laracbook.app
+ *
+ */
 namespace Larabook\Users;
 
 use Illuminate\Auth\UserTrait;
@@ -8,31 +19,44 @@ use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 use Eloquent;
 use Hash;
+use Laracasts\Commander\Events\EventGenerator;
+use Larabook\Registration\Events\UserRegistered;
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
+/**
+ * User Class Doc Comment
+ *
+ * @category User
+ * @package  MyPackage
+ * @author   Alonzo Tolver <alonzotolver@gmail.com>
+ * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @link     www.laracbook.app
+ *
+ */
+class User extends Eloquent implements UserInterface, RemindableInterface
+{
 
-	use UserTrait, RemindableTrait;
+    use UserTrait, RemindableTrait, EventGenerator;
 
- 	/**
-	 * Which fields are fillable.
-	 *
-	 * @var array
-	 */
+    /**
+     * Which fields are fillable.
+     *
+     * @var array
+     */
     protected $fillable = ['username', 'email', 'password'];
 
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	public $table = 'users';
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    public $table = 'users';
 
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = array('password', 'remember_token');
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = array('password', 'remember_token');
 
     /**
      * setPasswordAttribute
@@ -61,7 +85,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
      **/
     public static function register($username, $email, $password)
     {
-        return new static(compact('username', 'email', 'password'));
+        $user = new static(compact('username', 'email', 'password'));
+
+        $user->raise(new UserRegistered($user));
+
+        return $user;
     }
 
 }

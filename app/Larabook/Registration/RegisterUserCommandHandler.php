@@ -17,6 +17,7 @@ use Laracasts\Commander\CommandHandler;
 use Larabook\Registration\RegisterUserCommand;
 use Larabook\Users\UserRepository;
 use Larabook\Users\User;
+use Laracasts\Commander\Events\DispatchableTrait;
 
 /**
  * Class RegisterUserCommandHandler
@@ -30,13 +31,19 @@ use Larabook\Users\User;
 class RegisterUserCommandHandler implements CommandHandler
 {
 
-	protected $repository;
+    use DispatchableTrait;
+
+    /**
+     * Repository Object
+     *
+     * @var UserRepository
+     */
+    protected $repository;
 
     /**
      * Constructor
      *
-     * @param mixed UserRepository $repository
-     *
+     * @param UserRepository $repository The User Repository object
      */
     public function __construct(UserRepository $repository)
     {
@@ -46,7 +53,7 @@ class RegisterUserCommandHandler implements CommandHandler
     /**
      * Handles the command
      *
-     * @param mixed $command Command
+     * @param Command $command Command
      *
      * @return User
      * @author Alonzo Tolver
@@ -62,6 +69,8 @@ class RegisterUserCommandHandler implements CommandHandler
         );
 
         $this->repository->save($user);
+
+        $this->dispatchEventsFor($user);
 
         return $user;
     }

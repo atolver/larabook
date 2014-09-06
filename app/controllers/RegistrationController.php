@@ -74,9 +74,9 @@ class RegistrationController extends \BaseController
             new RegisterUserCommand($email, $username, $password)
         );
 
-
-
         Auth::login($user);
+
+        Flash::message('Glad to you as a new Larabook member!');
 
         return Redirect::home();
     }
