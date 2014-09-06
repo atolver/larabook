@@ -70,6 +70,11 @@ class RegistrationController extends \BaseController
 
         extract(Input::only('email', 'username', 'password'));
 
+        /**
+         * The User object to be passed to the RegisterUserCommand
+         *
+         * @var User
+         */
         $user = $this->execute(
             new RegisterUserCommand($email, $username, $password)
         );
