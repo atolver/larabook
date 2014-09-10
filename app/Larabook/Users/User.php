@@ -21,6 +21,7 @@ use Eloquent;
 use Hash;
 use Laracasts\Commander\Events\EventGenerator;
 use Larabook\Registration\Events\UserRegistered;
+use Laracasts\Presenter\PresentableTrait;
 
 /**
  * User Class Doc Comment
@@ -35,7 +36,7 @@ use Larabook\Registration\Events\UserRegistered;
 class User extends Eloquent implements UserInterface, RemindableInterface
 {
 
-    use UserTrait, RemindableTrait, EventGenerator;
+    use UserTrait, RemindableTrait, EventGenerator, PresentableTrait;
 
     /**
      * Which fields are fillable.
@@ -50,6 +51,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface
      * @var string
      */
     public $table = 'users';
+
+    /**
+     * Path to the presenter for the user.
+     *
+     * @var string
+     */
+    protected $presenter = 'Larabook\Users\UserPresenter';
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -70,6 +78,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = Hash::make($password);
+    }
+
+    /**
+     * statuses
+     *
+     *
+     * @return mixed
+     * @author Alonzo Tolver <alonzotolver@gmail.com>
+     *
+     **/
+    public function statuses()
+    {
+        return $this->hasMany('Larabook\Statuses\Status');
     }
 
     /**

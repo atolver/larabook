@@ -20,3 +20,43 @@ Route::post('register', [
     'as' => 'register_path',
     'uses' => 'RegistrationController@store'
 ]);
+
+/**
+ * Sessions
+ */
+Route::get('login', [
+    'as' => 'login_path',
+    'uses' => 'SessionsController@create'
+]);
+
+/**
+ * Sessions
+ */
+Route::post('login', [
+    'as' => 'login_path',
+    'uses' => 'SessionsController@store'
+]);
+
+/**
+ * Sessions
+ */
+Route::get('logout', [
+    'as' => 'logout_path',
+    'uses' => 'SessionsController@destroy'
+]);
+
+/**
+ * Statuses
+ */
+Route::get('statuses', [
+    'as' => 'statuses_path',
+    'uses' => 'StatusController@index'
+]);
+
+/**
+ * Statuses
+ */
+Route::post('statuses', [
+    'as' => 'statuses_path',
+    'uses' => 'StatusController@store'
+]);

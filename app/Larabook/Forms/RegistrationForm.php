@@ -20,11 +20,5 @@ class RegistrationForm extends FormValidator
         'password' => 'required|confirmed'
     ];
 
-    public function tester2($param)
-    {
-        return null;
-    }
-
-
 }
 

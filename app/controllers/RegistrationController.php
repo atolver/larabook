@@ -47,6 +47,8 @@ class RegistrationController extends \BaseController
     public function __construct(RegistrationForm $registrationForm)
     {
         $this->_registrationForm = $registrationForm;
+
+        $this->beforeFilter('guest');
     }
 
     /**
