@@ -41,6 +41,23 @@ class StatusRepository
     }
 
     /**
+     * getFeedForUser
+     *
+     * @param User $user description
+     *
+     * @return mixed
+     * @author Alonzo Tolver <alonzotolver@gmail.com>
+     *
+     **/
+    public function getFeedForUser(User $user)
+    {
+        $userIds = $user->followedUsers()->lists('followed_id');
+        $userIds[] = $user->id;
+
+        return Status::whereIn('user_id', $userIds)->latest()->get();
+    }
+
+    /**
      * save
      *
      * @param Status $status description

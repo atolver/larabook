@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+
+</head>
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://localhost/statuses">Larabook</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"> <a href="http://localhost/users">Browse Users</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="//www.gravatar.com/avatar/b48def645758b95537d4424c84d1a9ff?s=30" alt="Foobar" class="nav-gravatar">
+
+                            Foobar<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li> <a href="http://localhost/@Foobar">Your Profile</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li class="divider"></li>
+                            <li><a href="http://localhost/logout">Log Out</a></li>
+                        </ul>
+                    </li>
+                            </ul>
+        </div>
+    </div>
+</nav>
+
+    <div class="container">
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+            You are now following this user.
+        </div>
+    
+        
+<div class="row">
+    <div class="col-md-4">
+        <div class="media">
+            <div class="pull-left">
+                <a href="http://localhost/@OtherUser">
+    <img src="//www.gravatar.com/avatar/e0131b37b7e51a640543cd5227ff805a?s=50" alt="OtherUser" class="media-object img-circle avatar">
+</a>
+            </div>
+
+            <div class="media-body">
+                <h1 class="media-heading">
+                    OtherUser
+                </h1>
+                <ul class="list-inline text-muted">
+                    <li>
+                    0 Statuses
+                    </li>
+                    <li>
+                    1 Follower
+                    </li>
+                </ul>
+                                <a href="http://localhost/@Foobar">
+    <img src="//www.gravatar.com/avatar/b48def645758b95537d4424c84d1a9ff?s=25" alt="Foobar" class="media-object img-circle avatar">
+</a>
+                            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+                <form method="POST" action="http://localhost/follows/66" accept-charset="UTF-8"><input name="_method" type="hidden" value="DELETE"><input name="_token" type="hidden" value="yMlpr6mEkibMKLrkzHU0TAWaOMKYkwFODKsrIj3w">
+<input name="userIdToUnfollow" type="hidden" value="66">
+<button type="submit" class="btn btn-danger">Unfollow OtherUser</button>
+</form>
+                
+        <p>This user hasn't yet posted a status.</p>
+    </div>
+</div>
+    </div>
+
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+</html>

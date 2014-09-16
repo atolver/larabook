@@ -14,7 +14,6 @@
 
 use Larabook\Forms\RegistrationForm;
 use Larabook\Registration\RegisterUserCommand;
-use Larabook\Core\CommandBus;
 
 /**
  * RegistrationController Class Doc Comment
@@ -28,8 +27,6 @@ use Larabook\Core\CommandBus;
  */
 class RegistrationController extends \BaseController
 {
-
-    use CommandBus;
 
     /**
      * _registrationForm
@@ -70,20 +67,11 @@ class RegistrationController extends \BaseController
     {
         $this->_registrationForm->validate(Input::all());
 
-        extract(Input::only('email', 'username', 'password'));
-
-        /**
-         * The User object to be passed to the RegisterUserCommand
-         *
-         * @var User
-         */
-        $user = $this->execute(
-            new RegisterUserCommand($email, $username, $password)
-        );
+        $user = $this->execute(RegisterUserCommand::class);
 
         Auth::login($user);
 
-        Flash::message('Glad to you as a new Larabook member!');
+        Flash::message('Glad to have you as a new Larabook member!');
 
         return Redirect::home();
     }

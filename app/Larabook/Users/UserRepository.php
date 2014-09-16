@@ -40,5 +40,76 @@ class UserRepository
         return $user->save();
     }
 
+    /**
+     * getPaginated
+     *
+     * @param mixed $howMany description  = 25
+     *
+     * @return mixed
+     * @author Alonzo Tolver <alonzotolver@gmail.com>
+     *
+     **/
+    public function getPaginated($howMany = 25)
+    {
+        return User::orderBy('username', 'asc')->simplePaginate($howMany);
+    }
+
+    /**
+     * findByUsername
+     *
+     * @param mixed $username description
+     *
+     * @return mixed
+     * @author Alonzo Tolver <alonzotolver@gmail.com>
+     *
+     **/
+    public function findByUsername($username)
+    {
+        return User::with('statuses')->whereUsername($username)->first();
+    }
+
+    /**
+     * findById
+     *
+     * @param mixed $id description
+     *
+     * @return mixed
+     * @author Alonzo Tolver <alonzotolver@gmail.com>
+     *
+     **/
+    public function findById($id)
+    {
+        return User::findOrFail($id);
+    }
+
+    /**
+     * follow
+     *
+     * @param mixed $userIdToFollow description
+     * @param User $user description
+     *
+     * @return mixed
+     * @author Alonzo Tolver <alonzotolver@gmail.com>
+     *
+     **/
+    public function follow($userIdToFollow, User $user)
+    {
+        return $user->followedUsers()->attach($userIdToFollow);
+    }
+
+    /**
+     * unfollow
+     *
+     * @param mixed $userIdToFollow description
+     * @param User $user description
+     *
+     * @return mixed
+     * @author Alonzo Tolver <alonzotolver@gmail.com>
+     *
+     **/
+    public function unfollow($userIdToUnfollow, User $user)
+    {
+        return $user->followedUsers()->detach($userIdToUnfollow);
+    }
 }
 
