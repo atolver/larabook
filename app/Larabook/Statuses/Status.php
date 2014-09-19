@@ -75,5 +75,17 @@ class Status extends \Eloquent
         return $status;
     }
 
+    /**
+     * comments
+     *
+     *
+     * @return mixed
+     * @author Alonzo Tolver <alonzotolver@gmail.com>
+     *
+     **/
+    public function comments()
+    {
+        return $this->hasMany('Larabook\Statuses\Comment');
+    }
 
 }

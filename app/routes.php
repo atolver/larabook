@@ -53,12 +53,14 @@ Route::get('statuses', [
     'uses' => 'StatusesController@index'
 ]);
 
-/**
- * Statuses
- */
 Route::post('statuses', [
     'as' => 'statuses_path',
     'uses' => 'StatusesController@store'
+]);
+
+Route::post('statuses/{id}/comments', [
+    'as' => 'comment_path',
+    'uses' => 'CommentsController@store'
 ]);
 
 /**
@@ -87,3 +89,7 @@ Route::delete('follows/{id}', [
     'as' => 'follow_path',
     'uses' => 'FollowsController@destroy'
 ]);
+
+
+// Reset password
+Route::controller('password', 'RemindersController');
